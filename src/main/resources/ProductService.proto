@@ -1,0 +1,26 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.product.grpc;
+import "google/protobuf/empty.proto";
+
+message Product{
+  int32 itemid = 1;
+  string name = 2;
+  string category = 3;
+  float price = 4;
+}
+
+message Products{
+  repeated Product product = 1;
+}
+
+message ProductId{
+  int32 itemid = 1;
+}
+
+service ProductService{
+  rpc getAllProducts(google.protobuf.Empty) returns (Products);
+  rpc saveProduct(Product) returns (Products);
+  rpc removeProduct(Product) returns (Products);
+  rpc getProductWithId(ProductId) returns (Product);
+}
